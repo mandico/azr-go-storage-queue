@@ -1,0 +1,11 @@
+# Folders
+./bin
+./out
+./vendor
+
+# Files
+./junit-report.xml
+checkstyle-report.xml
+./coverage.xml
+./profile.cov
+yamllint-checkstyle.xml

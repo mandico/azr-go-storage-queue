@@ -84,7 +84,6 @@ func main() {
 		fmt.Printf(":: 8: Visible count of messages in the queue=%d\n", visibleCount)
 		fmt.Println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
 	}
-	return
 }
 
 func getVisibleCount(messagesURL *azqueue.MessagesURL, maxCount int32) (int32, error) {
