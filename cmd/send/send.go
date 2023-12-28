@@ -55,7 +55,9 @@ func main() {
 		}
 		fmt.Printf(":: 2: Visible count of messages in the queue=%d\n", visibleCount)
 
-		response, err := messageURL.Enqueue(ctx, "Hello!", 30*time.Second, 0) // TimeToLive = 0 means 7 days.
+		j := i + 1
+		msg := fmt.Sprint(":: ", j, " :: ", currentTime(), " ::")
+		response, err := messageURL.Enqueue(ctx, msg, 30*time.Second, 0) // TimeToLive = 0 means 7 days.
 		fmt.Printf(":: 3: Enqueue Hello %d: %v \n", i, response.MessageID)
 		props, err = queueURL.GetProperties(ctx)
 		if err != nil {
@@ -69,6 +71,10 @@ func main() {
 		fmt.Printf(":: 5: Visible count of messages in the queue=%d\n", visibleCount)
 		fmt.Println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
 	}
+}
+
+func currentTime() string {
+	return time.Now().String()
 }
 
 func getVisibleCount(messagesURL *azqueue.MessagesURL, maxCount int32) (int32, error) {
