@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: azure-storage-queue-secret
+data:
+  ConnectionString: UPDATE_CONNECTION_STRING
+  queueName: ZGVtbw==
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: receive
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: receive
+            image: docker.io/luizmandico/azr-go-storage-queue:latest
+            command: ["receive"]
+            envFrom:
+            - secretRef:
+                name: azure-storage-queue-secret
+          restartPolicy: OnFailure

@@ -55,3 +55,29 @@ Send 100 messages to the Azure Storage Queue.
 $ go run cmd/send/send.go 100
 ```
 ---
+# How to Build Application and Image
+
+Docker Build and Docker Release
+```bash
+make docker-build
+
+make docker-release
+```
+---
+# How to Deploy in Kubernetes
+
+Deploy with CronJob
+```bash
+kubectl apply -f k8s/job.yaml
+```
+
+---
+# Delete Resources
+```bash
+LOCATION="eastus"
+RESOURCE_GROUP="azr-rg-stg-queue"
+STORAGE_ACCOUNT="azrstgqueue"
+QUEUE="demo"
+
+az group delete -n $RESOURCE_GROUP -y
+```

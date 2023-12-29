@@ -4,7 +4,7 @@ GOVET=$(GOCMD) vet
 BINARY_NAME=azr-go-storage-queue
 VERSION?=0.0.0
 SERVICE_PORT?=3000
-DOCKER_REGISTRY?= #if set it should finished by /
+DOCKER_REGISTRY?=docker.io/luizmandico/#if set it should finished by /
 EXPORT_RESULT?=false # for CI please set EXPORT_RESULT to true
 
 GREEN  := $(shell tput -Txterm setaf 2)
@@ -79,6 +79,7 @@ docker-build: ## Use the dockerfile to build the container
 	docker build --rm --tag $(BINARY_NAME) .
 
 docker-release: ## Release the container with tag latest and version
+	@echo ${DOCKER_REGISTRY}${BINARY_NAME}
 	docker tag $(BINARY_NAME) $(DOCKER_REGISTRY)$(BINARY_NAME):latest
 	docker tag $(BINARY_NAME) $(DOCKER_REGISTRY)$(BINARY_NAME):$(VERSION)
 	# Push the docker images
